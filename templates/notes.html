@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{% static 'notes.css' %}">
+  <title>Notebook</title>
+</head>
+
+<body>
+  <div class="container">
+        <div class="cont">
+            <h1><i>Notebook</i></h1>
+            <h3>Welcome <span>{{ request.user.username }}!<span></h3>
+            <hr>
+        </div>
+
+        <div class="saved">
+            <h2>Your Saved Notes</h2>
+            <ul>
+                {% for note in notes %}
+                <li>{{ note.text }} <small>({{ note.created_at|date:"Y-m-d H:i" }})</small></li>
+                {% empty %}
+                <li>No notes yet.</li>
+                {% endfor %}
+            </ul>
+        </div>
+</div>
+  <br>
+  <hr>
+
+  <form method="post">
+    {% csrf_token %}
+    <textarea class="text" name="note" placeholder="Write your notes here..." required></textarea>
+    <br>
+    <button class="btn" type="submit">Save</button>
+  </form>
+
+  
+  {% comment %} <a href="{% url 'logout' %}" class="btn">Logout</a> {% endcomment %}
+</body>
+</html>
