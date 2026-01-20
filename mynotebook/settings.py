@@ -127,3 +127,8 @@ DATABASES = {
         default=os.environ.get("DATABASE_URL")
     )
 }
+
+
+# settings.py
+LOGIN_REDIRECT_URL = '/notes/'  # after login, go here
+LOGOUT_REDIRECT_URL = '/'       # after logout, go to login page
